@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    <link rel="stylesheet" href="/static/styles/cadastro.css">
+</head>
+<body id="clienteBody">
+    <header>
+        
+        <h1>Bem-vindo à Plataforma de Prestação de Serviços</h1>
+       
+        <h2>Cadastro de Cliente</h2>
+    </header>
+    <main>
+        
+        <form id="form-cadastro-cliente">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nomeCliente" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="emailCliente" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="Nr. telefone">Telefone:</label>
+                <input type="tel" id="telefoneCliente" name="telefone" pattern="\d{9}" required>
+
+            </div>
+            
+            <button id="enviarClienteCadastro" type="submit">Cadastrar</button>
+           
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Plataforma de Prestação de Serviços</p>
+    </footer>
+    <script src="/static/scripts/pw.js"></script>
+</body>
+</html>

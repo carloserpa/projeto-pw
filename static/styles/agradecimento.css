@@ -1,0 +1,35 @@
+
+/* Estilos adicionais para a página de agradecimento */
+
+.agradecimento {
+    background-image: url("../img/agradecimento.jpg");
+    
+}
+
+.container {
+    
+    height: 100vh;
+   
+}
+
+
+
+.texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.texto h1,
+.texto p {
+    margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .texto {
+        width: 90%;
+    }
+}
