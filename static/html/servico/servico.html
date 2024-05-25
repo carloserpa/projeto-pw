@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap demo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/static/styles/cadastro.css">
+</head>
+<body id="clienteBody">
+    <header>
+        <h2>Solicitar Serviço</h2>
+    </header>
+    <main>
+        
+            <form id="form-cadastro-usuario">
+
+                <div class="form-group">
+                    <label for="profissao">Profissional:</label>
+                    <select id="profissao" name="profissao" required>
+                        <option value="">Especialidade</option>
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="descricao">Descrição do Serviço:</label>
+                    <textarea id="descricao" name="descricao" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deseja-orcamento">Deseja receber orçamento por:</label>
+                                       
+                    <label for="ckb_email">
+                        <input type="checkbox" id="ckb_email" name="ckb_email" value="telefone"/>
+                    Email</label>
+               
+                    <label for="ckb_telefone">
+                        <input type="checkbox" id="ckb_telefone" name="ckb_telefone" value="telefone"/>
+                    Telefone</label>
+                    </div>
+                <div class="d-grid gap-2 d-md-block">
+                    <button id="enviarUsuarioCadastro" class="btn btn-dark" type="submit">Enviar Solicitaçaão</button>
+                    <a id="btn_voltar_menu_principal" class="btn btn-dark" href="/" role="button">Menu Principal</a>
+                </div>  
+            </form>
+       
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Plataforma de Prestação de Serviços</p>
+    </footer>
+    <script src="scripts/script.js"></script>
+    <script>
+        const checkboxOrcamento = document.getElementById('deseja-orcamento');
+        const grupoValorProposta = document.getElementById('grupo-valor-proposta');
+        const campoValorProposta = document.getElementById('valor-proposta');
+        const descricao = document.getElementById('descricao');
+
+       
+        checkboxOrcamento.addEventListener('change', function() {
+            
+            if (checkboxOrcamento.checked) {
+                campoValorProposta.required = false;
+                descricao.placeholder = "(OPCIONAL CASO ORÇAMENTO FOR SELECIONADO)";
+                grupoValorProposta.style.display = 'none'; // Oculta o campo de valor
+            } else {
+                campoValorProposta.required = true;
+                descricao.placeholder = "Descrição do Serviço";
+                grupoValorProposta.style.display = 'block'; // Exibe o campo de valor
+            }
+        });
+    </script>
+</body>
+</html>
+
+

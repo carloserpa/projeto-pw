@@ -1,8 +1,7 @@
-
 const express = require('express');
 const clienteRouter = express.Router();
 
-const clienteControle = require('./../controller/ClienteControle');
+//const clienteControle = require('./../controller/ClienteControle');
 clienteRouter.post('/', clienteControle.cadastrar);
 clienteRouter.get('/', clienteControle.todos);
 clienteRouter.get('/:nome', clienteControle.buscar);
