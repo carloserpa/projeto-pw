@@ -88,7 +88,7 @@ window.addEventListener("load", (event) => {
               temp += "<td>" + itemData.ativo + "</td>";
               temp += "<td>";            
               temp += "<a id=\"btn_atualizar_profissao\" class=\"btn btn-dark\" href=\"#\" role=\"button\">Atualizar</a>";
-              temp += "<a id=\"btn_deletar_profissao\" class=\"btn btn-dark\" href=\"#\" role=\"button\">Deletar</a>";
+              temp += "<a id=\"btn_deletar_profissao\" class=\"btn btn-dark\" href=\"#\" role=\"button\" onClick=\"remove("+ itemData.id +");\">Deletar</a>";
               temp += "</td></tr>";
             });
             document.getElementById('data').innerHTML = temp;
@@ -125,21 +125,19 @@ window.addEventListener("load", (event) => {
    - Botao da pagina de cadastro /profissao/form.html
    #################################################################
  */
-var formCadastroProfissao = document.getElementById("form-cadastro-profissao");
-if(formCadastroProfissao == 'true'){
+var formCadastroProfissao = document.getElementById("form-cadastro-usuario");
+//if(formCadastroProfissao == 'true'){
   formCadastroProfissao.addEventListener('submit', function(e){
     e.preventDefault()
    
-    var nomeProfissao=document.getElementById('nomeProfissao').value
-    var emailProfissao=document.getElementById('emailProfissao').value
-    var telefoneProfissao=document.getElementById('telefoneProfissao').value
+    var descricaoProfissao=document.getElementById('descricaoProfissao').value
+    var ativoProfissao=document.getElementById('ckbAtivoprofissao').value
    
-    fetch('/api/profissaos/', {
+    fetch('/api/profissoes/', {
      method: 'POST',
      body: JSON.stringify({
-       nome:nomeProfissao,
-       email:emailProfissao,
-       telefone:telefoneProfissao 
+       descricao:descricaoProfissao,
+       ativo:ativoProfissao,
      }),
      headers: {
        'Content-type': 'application/json; charset=UTF-8',
@@ -149,11 +147,15 @@ if(formCadastroProfissao == 'true'){
         return response.json()})
      .then(function(data)
       {
-       //console.log(data.success)
+        console.log(data);
+        console.log(data.success);
+        window.location.replace('http://localhost:3000/profissao/listar');
+        return;
+       
       //window.location.href = 'http://localhost:3000/profissao/listar';
     }).catch(error => console.error('Error:', error)); 
    });
-}
+//}
 
   /*
    #################################################################
@@ -164,3 +166,14 @@ if(formCadastroProfissao == 'true'){
 document.addEventListener('DOMContentLoaded', (event) =>  {  
   
 });
+
+function remove(id){
+  fetch("/api/profissoes/deletar/" + id, {
+    method: 'DELETE'
+  }).then(() => {
+     console.log('removed');
+     window.location.reload();  
+  }).catch(err => {
+    console.error(err)
+  });
+}

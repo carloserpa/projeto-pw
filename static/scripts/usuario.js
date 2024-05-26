@@ -87,7 +87,7 @@ window.addEventListener("load", (event) => {
               temp += "<td>" + itemData.nome + "</td>";
               temp += "<td>" + itemData.email + "</td>";
               temp += "<td>" + itemData.telefone + "</td>";
-              temp += "<td>" + 1 + "</td>";
+              temp += "<td>" + getProfissao(1) + "</td>";
               temp += "<td>";            
               temp += "<a id=\"btn_atualizar_usuario\" class=\"btn btn-dark\" href=\"#\" role=\"button\">Atualizar</a>";
               temp += "<a id=\"btn_deletar_usuario\" class=\"btn btn-dark\" href=\"#\" role=\"button\" onClick=\"remove("+ itemData.id +");\">Deletar</a>";
@@ -108,11 +108,11 @@ window.addEventListener("load", (event) => {
           'Content-type': 'application/json; charset=UTF-8',
         }      
       })
-      .then(function(response){ 
+      .then(function(response){          
          return response.json()})
       .then(function(data){
-        console.log("VAlor: "+ data)
-         return "data";
+        console.log("Valor: "+ data.descricao)
+         return data.descricao;
         
       }).catch(error => console.error('Error:', error)
     )
