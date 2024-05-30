@@ -1,10 +1,8 @@
 const express = require('express');
 var Profissao = require('../model/Profissao');
+var db = require('../repositorio/db');
 var idProfissao = 0;
-let profissoes = [];
-profissoes.push(new Profissao(1,"Pedreiro", true));
-profissoes.push(new Profissao(2,"Marceneiro", true));
-profissoes.push(new Profissao(3,"Mestre de Obra", true));
+let profissoes = db.profissoes;
 
 const cadastrar =  async (req, res) => {
     const {descricao, ativo } = req.body;
@@ -17,7 +15,6 @@ const cadastrar =  async (req, res) => {
     } else {
       idProfissao = 1;
     }
-    console.log(descricao);
     var profissao = new Profissao(idProfissao,descricao, ativo);    
     profissoes.push(profissao);
     res.status(201).json(profissao);
@@ -32,20 +29,22 @@ const buscar = async (req, res) => {
     if (!profissao) {
       return res.status(404).json({message:'Profissao não encontrado'});
     }
-    console.log("Estou aqui:" + profissao.descricao)
     res.json(profissao);
 };
 
 const atualizar = async (req, res) => {
-    const profissao = profissoes.find(b => b.descricao === parseInt(req.params.descricao));
-    if (!profissao) {
+    const profissaoAtualizar = profissoes.find(b => b.id === parseInt(req.params.id));
+    const indice = profissoes.findIndex(b => b.id === parseInt(req.params.id));
+    console.log(indice);
+    if (!profissaoAtualizar) {
       return res.status(404).json({message:'Profissao não encontrado'});
     }
   
     const { descricao, ativo } = req.body;
-    var profissaoAtualizar = new Client(descricao, ativo);
-    profissaoAtualizar.descricao = descricao || profissao.descricao;
-    profissaoAtualizar.ativo = ativo || profissao.ativo;
+    //var profissaoAtualizar = new Client(descricao, ativo);
+    profissaoAtualizar.descricao = descricao || profissaoAtualizar.descricao;
+    profissaoAtualizar.ativo = ativo || profissaoAtualizar.ativo;
+    profissoes.splice(indice,1, profissaoAtualizar)
   
     res.json(profissaoAtualizar);
 };

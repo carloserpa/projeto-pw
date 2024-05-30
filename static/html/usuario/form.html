@@ -27,18 +27,18 @@
             </div>
             <div class="form-group">
                 <label for="Nr. telefone">Telefone:</label>
-                <input type="tel" id="telefoneUsuario" name="telefone" pattern="\d{9}" required>
+                <input type="tel" id="telefoneUsuario" name="telefone" required>
 
             </div> 
             <div class="form-group" id="group_profissao" >
                 <label for="txt_profissao:">Profissão:</label>
                 <select id="batchSelect" class="btn btn-secondary dropdown-toggle" style="text-align: left;">
-                    <option value="0" selected>Nenhuma</option>
+                     <option id="optionProfissao" value="0" selected>Nenhuma</option>
                 </select>                
             </div>
            </br>
             <div class="d-grid gap-2 d-md-block">
-                <button id="enviarUsuarioCadastro" class="btn btn-dark" type="submit">Cadastrar</button>
+                <button id="enviarUsuarioCadastro" class="btn btn-dark" type="submit">Salvar</button>
                 <a id="btn_voltar_menu_principal" class="btn btn-dark" href="/usuario/listar" role="button">Lista Usuarios</a>
             </div> 
             
@@ -49,6 +49,6 @@
     <footer>
         <p>&copy; 2024 Plataforma de Prestação de Serviços</p>
     </footer>
-    <script src="/static/scripts/usuario.js"></script>
+    <script src="/static/scripts/usuario/form.js"></script>
 </body>
 </html>

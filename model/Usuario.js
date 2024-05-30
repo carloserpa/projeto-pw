@@ -3,6 +3,7 @@ function Usuario(id, nome, email , telefone) {
     this.nome = nome || null;    
     this.email = email || null;    
     this.telefone = telefone || null;
+    this.profissao = null;
 }
 
 Usuario.prototype.getId = function() {

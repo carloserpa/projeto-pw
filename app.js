@@ -15,6 +15,9 @@ app.get('/profissao/listar', (req, res) => {
 app.get('/profissao/cadastrar', (req, res) => {
   res.sendFile('form.html', {root: __dirname + "/static/html/profissao/"});
 });
+app.get('/profissao/atualizar', (req, res) => {
+  res.sendFile('form.html', {root: __dirname + "/static/html/profissao/"});
+});
 
 
 // Usuarios
@@ -24,10 +27,16 @@ app.get('/usuario/listar', (req, res) => {
 app.get('/usuario/cadastrar', (req, res) => {
   res.sendFile('form.html', {root: __dirname + "/static/html/usuario/"});
 });
+app.get('/usuario/atualizar', (req, res) => {
+  res.sendFile('form.html', {root: __dirname + "/static/html/usuario/"});
+});
 
 //Servico
 app.get('/servico/listar', (req, res) => {
   res.sendFile('servico.html', {root: __dirname + "/static/html/servico/"});
+});
+app.get('/servico/confirmacao', (req, res) => {
+  res.sendFile('confirmacao.html', {root: __dirname + "/static/html/servico/"});
 });
 
 

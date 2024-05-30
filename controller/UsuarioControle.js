@@ -1,11 +1,10 @@
 const profissaoRota = require('../routes/profissao.routes');
 const express = require('express');
 var Usuario = require('../model/Usuario');
+var Profissao = require('../model/Profissao');
+var db = require('../repositorio/db');
 var idUsuario = 0;
-let usuarios = [];
-usuarios.push(new Usuario(1,"Carlos Serpa", "carlos.serpa@email.com", "32048093898"));
-usuarios.push(new Usuario(2,"Milena Serpa", "milena.serpa@email.com", "32048093898"));
-usuarios.push(new Usuario(3,"Benjamin Serpa", "ben.serpa@email.com", "32048093898"));
+let usuarios = db.usuarios;
 
 const cadastrar =  async (req, res) => {
     const {nome, email, telefone, profissao } = req.body;
@@ -30,7 +29,7 @@ const cadastrar =  async (req, res) => {
 }
 
 const todos = async (req, res) => {
-  console.log("EStou aqui")
+  
   function getProfissao(id){
     fetch("/api/profissoes/buscar/" + id, {
       method: 'GET',
@@ -53,7 +52,7 @@ const todos = async (req, res) => {
 };
 
 const buscar = async (req, res) => {
-    const usuario = usuarios.find(b => b.nome === parseInt(req.params.nome));
+    const usuario = usuarios.find(b => b.id === parseInt(req.params.id));
     if (!usuario) {
       return res.status(404).json({message:'Usuario não encontrado'});
     }
@@ -61,21 +60,26 @@ const buscar = async (req, res) => {
 };
 
 const atualizar = async (req, res) => {
-    const usuario = usuarios.find(b => b.nome === parseInt(req.params.nome));
-    if (!usuario) {
+    const usuarioAtualizar = usuarios.find(b => b.id === parseInt(req.params.id));
+    const indice = usuarios.findIndex(b => b.id === parseInt(req.params.id));
+    if (!usuarioAtualizar) {
       return res.status(404).json({message:'Usuario não encontrado'});
     }
-  
-    const { nome, email, telefone } = req.body;
-    var usuarioAtualizar = new Client(nome, email, telefone);
-    usuarioAtualizar.ge = email || usuario.email;
-    usuarioAtualizar.telefone = telefone || usuario.telefone;
+    const { nome, email, telefone, profissaoId } = req.body;
+    var profissaoAtualizar = db.profissoes.at(parseInt(profissaoId));
+    //const profissaoId = usuarios.findIndex(b => b.id === parseInt(req.params.id));
+    
+    //var usuarioAtualizar = new Client(nome, email, telefone);
+    usuarioAtualizar.nome = nome || usuarioAtualizar.nome;
+    usuarioAtualizar.email = email || usuarioAtualizar.email;
+    usuarioAtualizar.telefone = telefone || usuarioAtualizar.telefone;
+    usuarioAtualizar.profissao = profissaoAtualizar || usuarioAtualizar.profissao;
+    usuarios.splice(indice,1, usuarioAtualizar)
   
     res.json(usuarioAtualizar);
 };
 
 const deletar = async (req, res) => {
-    console.log(req.params.id)
     const indiceUsuario = usuarios.findIndex(b => b.id === parseInt(req.params.id));
     if (indiceUsuario === -1) {
       return res.status(404).json({message:'Usuario não encontrado'});
